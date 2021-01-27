@@ -9,6 +9,7 @@
 
   .logo-container {
     display: flex;
+    padding-right: 20px;
     align-items: center;
     width: calc(#{nb-theme(sidebar-width)} - #{nb-theme(header-padding)});
   }

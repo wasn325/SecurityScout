@@ -12,12 +12,16 @@ const routes: Routes = [{
   children: [
     {
       path: 'dashboard',
-      component: ECommerceComponent,
-    },
-    {
-      path: 'iot-dashboard',
       component: DashboardComponent,
     },
+    {
+      path: 'storage',
+      loadChildren: () => import('./storage/storage.module')
+        .then(m => m.StorageModule),
+    },
+
+
+
     {
       path: 'layout',
       loadChildren: () => import('./layout/layout.module')

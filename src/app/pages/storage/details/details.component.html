@@ -1,0 +1,13 @@
+<nb-card *ngIf="id==null">
+  <nb-card-header><h1 style="color: red;">Fehler!</h1></nb-card-header>
+  <nb-card-body>Kein Artikel gefunden oder keine ID angegeben!</nb-card-body>
+</nb-card>
+<nb-card *ngIf="id!=null">
+  <nb-card-header>Details ({{data.name}})</nb-card-header>
+  <nb-card-body>
+    <div class="form-group row"><p>Artikel Nummer: </p> {{data.id}}</div>
+    <div class="form-group row"><p>Name: </p> {{data.name}}</div>
+    <div class="form-group row"><p>Beschreibung: </p> {{data.description}}</div>
+    <div class="form-group row"><p>Lagernd: </p> {{data.stored}}</div>
+  </nb-card-body>
+</nb-card>
