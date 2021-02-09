@@ -3,7 +3,7 @@
     Warenbestand
   </nb-card-header>
   <nb-card-body>
-    <ng2-smart-table [id]='table' [settings]='settings' [source]='source'>
+    <ng2-smart-table class="order-table" [id]='table' [settings]='settings' [source]='source' (edit)="edit($event)">
     </ng2-smart-table>
   </nb-card-body>
 </nb-card>

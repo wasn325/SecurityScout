@@ -1,4 +1,4 @@
 
 export abstract class StorageData {
-  abstract getData(): any[];
+  abstract getData(): Promise<any>;
 }

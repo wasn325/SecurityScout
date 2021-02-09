@@ -1,9 +1,4 @@
 import {RouterModule, Routes} from '@angular/router';
-import {FormsComponent} from '../forms/forms.component';
-import {FormInputsComponent} from '../forms/form-inputs/form-inputs.component';
-import {FormLayoutsComponent} from '../forms/form-layouts/form-layouts.component';
-import {ButtonsComponent} from '../forms/buttons/buttons.component';
-import {DatepickerComponent} from '../forms/datepicker/datepicker.component';
 import {NgModule} from '@angular/core';
 import {OverviewComponent} from './overview/overview.component';
 import {AddComponent} from './add/add.component';

@@ -13,21 +13,32 @@ export const MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Warenlager',
-    icon: 'layout-outline',
-    data: {
-      permission: 'view',
-      resource: 'storage',
-    },
+    icon: 'archive-outline',
     children: [
       {
         title: 'Übersicht',
+        icon: 'eye-outline',
         link: '/pages/storage/overview',
+        data: {
+          permission: 'view',
+          resource: 'storage',
+        },
       },
       {
         title: 'Neu',
+        icon: 'plus-circle-outline',
         link: '/pages/storage/add',
         data: {
           permission: 'create',
+          resource: 'storage',
+        },
+      },
+      {
+        title: 'Bearbeiten',
+        icon: 'edit-outline',
+        link: '/pages/storage/edit',
+        data: {
+          permission: 'edit',
           resource: 'storage',
         },
       },

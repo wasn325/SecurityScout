@@ -1,7 +1,7 @@
 import {ModuleWithProviders, NgModule, Optional, SkipSelf} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MAT_RIPPLE_GLOBAL_OPTIONS} from '@angular/material/core';
-import {NbAuthJWTToken, NbAuthModule, NbPasswordAuthStrategy} from '@nebular/auth';
+import {NbAuthJWTInterceptor, NbAuthJWTToken, NbAuthModule, NbPasswordAuthStrategy} from '@nebular/auth';
 import {NbRoleProvider, NbSecurityModule} from '@nebular/security';
 import {of as observableOf} from 'rxjs';
 
@@ -53,6 +53,8 @@ import {StorageDataService} from './mock/storage-data.service';
 import {environment} from '../../environments/environment';
 import {AuthGuard} from './guardians/auth.guard';
 import {RoleProvider} from './providers/role.provider';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {TokenInterceptor} from './providers/token.interceptor';
 
 const socialLinks = [];
 
@@ -78,14 +80,8 @@ const DATA_SERVICES = [
   {provide: SecurityCamerasData, useClass: SecurityCamerasService},
   {provide: StorageData, useClass: StorageDataService},
   {provide: MAT_RIPPLE_GLOBAL_OPTIONS, useExisting: RippleService},
+  {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
 ];
-
-export class NbSimpleRoleProvider extends NbRoleProvider {
-  getRole() {
-    // here you could provide any role based on any auth flow
-    return observableOf('guest');
-  }
-}
 
 export const NB_CORE_PROVIDERS = [
   ...MockDataModule.forRoot().providers,
@@ -142,17 +138,29 @@ export const NB_CORE_PROVIDERS = [
     },
   }).providers,
 
+  // Roles have to be lowercase!!!
   NbSecurityModule.forRoot({
     accessControl: {
       guest: {},
       admin: {
         view: '*',
+        edit: '*',
+        create: '*',
       },
       super_admin: {
         view: '*',
         edit: '*',
         create: '*',
         delete: '*',
+      },
+      buy: {
+        view: 'storage',
+        create: 'storage',
+        edit: 'storage',
+      },
+      sell: {
+        view: 'storage',
+        edit: 'storage',
       },
     },
   }).providers,

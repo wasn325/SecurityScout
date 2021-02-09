@@ -1,57 +1,16 @@
 import {StorageData} from '../data/storage-data';
 import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {environment} from '../../../environments/environment';
 
 @Injectable()
 export class StorageDataService extends StorageData {
 
-  data = [
-    {
-      id: 1,
-      name: 'Test',
-      description: 'Ein Test Produkt',
-      stored: 50,
-    },
-    {
-      id: 2,
-      name: 'Test',
-      description: 'Ein Test Produkt',
-      stored: 0,
-    },
-    {
-      id: 3,
-      name: 'Test',
-      description: 'Ein Test Produkt',
-      stored: 1200,
-    },
-    {
-      id: 4,
-      name: 'Test',
-      description: 'Ein Test Produkt',
-      stored: 40,
-    },
-    {
-      id: 5,
-      name: 'Test',
-      description: 'Ein Test Produkt',
-      stored: 20,
-    },
-    {
-      id: 6,
-      name: 'Test',
-      description: 'Ein Test Produkt',
-      stored: 300,
-    },
-    {
-      id: 7,
-      name: 'Cola Master 3000',
-      description: 'Siehe Name',
-      stored: 1,
-    },
-  ];
+  constructor(private http: HttpClient) {
+    super();
+  }
 
-  getData() {
-    return this.data;
+  getData(): Promise<any> {
+    return this.http.get(environment.backend + 'api/v1/storage').toPromise();
   }
 }
-
-// tslint:disable-next-line:quotemark
