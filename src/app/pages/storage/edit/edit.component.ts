@@ -41,6 +41,8 @@ export class EditComponent implements OnInit {
       },
       error => { // Something went wrong
         this.toastr.danger(error.error, 'Es ist ein Fehler aufgetreten!');
+        this.item = null;
+        this.setupItem();
       })
     ;
   }
