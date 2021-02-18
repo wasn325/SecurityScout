@@ -26,4 +26,4 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
     - run: npm run build:prod --if-present
-    - run: npm run electron:build:all --if-present
+    - run: npm run electron:build --if-present
