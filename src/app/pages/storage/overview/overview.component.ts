@@ -23,22 +23,22 @@ export class OverviewComponent {
       nr: {
         title: 'Artikel Nr.',
         type: 'number',
-        width: '15%',
         sortDirection: 'asc',
+        width: '5%'
       },
       name: {
         title: 'Name',
         type: 'string',
-        width: '20%',
+        width: '20%'
       },
       description: {
         title: 'Beschreibung',
         type: 'string',
+        width: '55%'
       },
       stored: {
         title: 'Lagerbestand',
         type: 'number',
-        width: '15%',
       },
     },
   };
