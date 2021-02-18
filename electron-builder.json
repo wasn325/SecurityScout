@@ -1,5 +1,5 @@
 {
-  "productName": "angular-electron",
+  "productName": "SecurityScout",
   "directories": {
     "output": "release/"
   },
@@ -20,19 +20,20 @@
         "!tslint.json"
     ],
   "win": {
-    "icon": "dist/assets/icons",
+    "icon": "dist/assets/images/desktop-logo.png",
     "target": [
-      "portable"
+      "portable",
+      "msi"
     ]
   },
   "mac": {
-    "icon": "dist/assets/icons",
+    "icon": "dist/assets/images/desktop-logo.png",
     "target": [
       "dmg"
     ]
   },
   "linux": {
-    "icon": "dist/assets/icons",
+    "icon": "dist/assets/images/desktop-logo.png",
     "target": [
       "AppImage"
     ]
