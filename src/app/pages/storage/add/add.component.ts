@@ -35,6 +35,7 @@ export class AddComponent {
     this.form = this.fb.group({
       nr: ['', Validators.required],
       name: ['', Validators.required],
+      sap_name: ['', Validators.required],
       description: ['', Validators.required],
       stored: ['', Validators.required],
     });
@@ -57,6 +58,7 @@ export class AddComponent {
     if (
       this.form.get('nr').value === '' ||
       this.form.get('name').value === '' ||
+      this.form.get('sap_name').value === '' ||
       this.form.get('description').value === '' ||
       this.form.get('stored').value === ''
     ) {

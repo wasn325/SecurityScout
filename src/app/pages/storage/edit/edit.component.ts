@@ -22,6 +22,7 @@ export class EditComponent implements OnInit {
     this.editForm = this.fb.group({
       nr: ['', Validators.required],
       name: ['', Validators.required],
+      sap_name: ['', Validators.required],
       description: ['', Validators.required],
       stored: ['', Validators.required],
     });

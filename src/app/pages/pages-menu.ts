@@ -44,6 +44,23 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
     ],
   },
+  {
+    title: 'Verwaltung',
+    group: true,
+    data: {
+      permission: 'view',
+      resource: 'admin',
+    },
+  },
+  {
+    title: 'Benutzer',
+    icon: 'people-outline',
+    link: '/pages/admin/user',
+    data: {
+      permission: 'edit',
+      resource: 'user',
+    },
+  },
   /*{
     title: 'nicht benötigt',
     group: true,

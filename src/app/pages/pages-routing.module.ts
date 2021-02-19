@@ -19,6 +19,11 @@ const routes: Routes = [{
       loadChildren: () => import('./storage/storage.module')
         .then(m => m.StorageModule),
     },
+    {
+      path: 'admin',
+      loadChildren: () => import('./administration/administration.module')
+        .then(m => m.AdministrationModule),
+    },
 
     /*{
       path: 'brb',

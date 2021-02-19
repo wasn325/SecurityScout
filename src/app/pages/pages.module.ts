@@ -8,6 +8,7 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import {StorageModule} from './storage/storage.module';
 import { BrbComponent } from './brb/brb.component';
+import {AdministrationModule} from "./administration/administration.module";
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { BrbComponent } from './brb/brb.component';
     MiscellaneousModule,
     StorageModule,
     NbCardModule,
+    AdministrationModule
   ],
   declarations: [
     PagesComponent,

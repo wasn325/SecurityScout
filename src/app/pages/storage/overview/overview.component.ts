@@ -31,14 +31,19 @@ export class OverviewComponent {
         type: 'string',
         width: '20%'
       },
+      sap_name: {
+        title: 'SAP',
+        type: 'string',
+        width: '10%'
+      },
       description: {
         title: 'Beschreibung',
-        type: 'string',
-        width: '55%'
+        type: 'string'
       },
       stored: {
         title: 'Lagerbestand',
         type: 'number',
+        width: '10%'
       },
     },
   };

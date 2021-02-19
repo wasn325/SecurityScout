@@ -5,13 +5,6 @@
   "version": "1.0.0",
   "main": "main.js",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/akveo/ngx-admin.git"
-  },
-  "bugs": {
-    "url": "https://github.com/akveo/ngx-admin/issues"
-  },
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
     "ng": "ng",
@@ -24,6 +17,7 @@
     "electron:serve": "wait-on tcp:4200 && npm run electron:serve-tsc && npx electron . --serve",
     "electron:local": "npm run build:prod && npx electron .",
     "electron:build": "npm run build:prod && electron-builder build --publish=never",
+    "electron:build:publish": "cross-env GH_TOKEN=4bd5080e445604c57c5ecff88986ac71e427c6e3 && npm run build:prod && electron-builder build --publish=always",
     "electron:build:all": "npm run build:prod && electron-builder build --publish=never -mwl",
     "test": "ng test --watch=false",
     "test:watch": "ng test",
@@ -64,6 +58,8 @@
     "core-js": "^2.5.1",
     "cross-env": "^7.0.3",
     "echarts": "^4.0.2",
+    "electron-log": "^4.3.1",
+    "electron-updater": "^4.3.5",
     "eslint": "^7.20.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsdoc": "^32.0.2",
@@ -130,5 +126,46 @@
     "typescript": "^4.0.5",
     "@types/mocha": "^8.2.1",
     "mocha": "^8.3.0"
+  },
+  "build": {
+    "appId": "SecurityScout",
+    "asar": true,
+    "files": [
+      "**/*",
+      "!**/*.ts",
+      "!*.code-workspace",
+      "!LICENSE.md",
+      "!package.json",
+      "!package-lock.json",
+      "!src/",
+      "!e2e/",
+      "!hooks/",
+      "!angular.json",
+      "!_config.yml",
+      "!karma.conf.js",
+      "!tsconfig.json",
+      "!tslint.json"
+    ],
+    "directories": {
+      "output": "release/"
+    },
+    "win": {
+      "icon": "dist/assets/images/desktop-logo.png",
+      "target": [
+        "portable",
+        "nsis"
+      ]
+    },
+    "nsis": {
+      "installerIcon": "dist/assets/images/desktop-logo.ico",
+      "uninstallerIcon": "dist/assets/images/desktop-logo.ico",
+      "uninstallDisplayName": "SecurityScout",
+      "license": "license.txt",
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "warningsAsErrors": false,
+      "installerSidebar": "dist/assets/images/installer-background.bmp",
+      "uninstallerSidebar": "dist/assets/images/installer-background.bmp"
+    }
   }
 }
