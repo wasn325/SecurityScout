@@ -55,7 +55,7 @@
     "chart.js": "2.9.4",
     "ckeditor": "4.7.3",
     "classlist.js": "1.1.20150312",
-    "core-js": "^2.5.1",
+    "core-js": "^3.9.0",
     "cross-env": "^7.0.3",
     "crypto": "^1.0.1",
     "echarts": "^4.0.2",
