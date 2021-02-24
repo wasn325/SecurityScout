@@ -2,7 +2,7 @@
   "name": "SecurityScout",
   "productName": "SecurityScout",
   "author": "Fabian Frischmann",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "main": "main.js",
   "license": "MIT",
   "scripts": {
@@ -152,14 +152,25 @@
     "directories": {
       "output": "release/"
     },
+    "publish": [
+      {
+        "provider": "github",
+        "private": true,
+        "owner": "wasn325",
+        "repo": "SecurityScout",
+        "token": "4bd5080e445604c57c5ecff88986ac71e427c6e3"
+      }
+    ],
     "win": {
       "icon": "dist/assets/images/desktop-logo.png",
+      "requestedExecutionLevel": "requireAdministrator",
       "target": [
         "portable",
         "nsis"
       ]
     },
     "nsis": {
+      "allowElevation": true,
       "installerIcon": "dist/assets/images/desktop-logo.ico",
       "uninstallerIcon": "dist/assets/images/desktop-logo.ico",
       "uninstallDisplayName": "SecurityScout",

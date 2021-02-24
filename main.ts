@@ -1,10 +1,16 @@
 import {app, BrowserWindow, Menu, screen} from 'electron';
 import * as path from 'path';
 import * as url from 'url';
+import {autoUpdater} from "electron-updater";
+import log from "electron-log";
 
 let win: BrowserWindow = null;
 const args = process.argv.slice(1),
   serve = args.some(val => val === '--serve');
+
+autoUpdater.logger = log;
+autoUpdater.allowPrerelease = true;
+log.info('App starting...');
 
 function createWindow(): BrowserWindow {
 
@@ -21,7 +27,7 @@ function createWindow(): BrowserWindow {
       nodeIntegration: true,
       allowRunningInsecureContent: (serve) ? true : false,
       contextIsolation: false,  // false if you want to run 2e2 test with Spectron
-      enableRemoteModule : true // true if you want to run 2e2 test  with Spectron
+      enableRemoteModule: true // true if you want to run 2e2 test  with Spectron
       // or use remote module in renderer
       // context (ie. Angular)
     },
@@ -63,7 +69,34 @@ try {
   // Added 400 ms to fix the black background issue while
   // using transparent window. More detais
   // at https://github.com/electron/electron/issues/15947
-  app.on('ready', () => setTimeout(createWindow, 400));
+
+  autoUpdater.on('checking-for-update', () => {
+    sendStatusToWindow('Checking for update...');
+  })
+  autoUpdater.on('update-available', (info) => {
+    sendStatusToWindow('Update available.');
+  })
+  autoUpdater.on('update-not-available', (info) => {
+    sendStatusToWindow('Update not available.');
+  })
+  autoUpdater.on('error', (err) => {
+    sendStatusToWindow('Error in auto-updater. ' + err);
+  })
+  autoUpdater.on('download-progress', (progressObj) => {
+    let log_message = "Download speed: " + progressObj.bytesPerSecond;
+    log_message = log_message + ' - Downloaded ' + progressObj.percent + '%';
+    log_message = log_message + ' (' + progressObj.transferred + "/" + progressObj.total + ')';
+    sendStatusToWindow(log_message);
+  })
+  autoUpdater.on('update-downloaded', (info) => {
+    sendStatusToWindow('Update downloaded');
+    autoUpdater.quitAndInstall(false, true)
+  });
+
+  app.on('ready', () => {
+    setTimeout(createWindow, 400);
+    autoUpdater.checkForUpdatesAndNotify();
+  });
 
   // Quit when all windows are closed.
   app.on('window-all-closed', () => {
@@ -85,4 +118,8 @@ try {
 } catch (e) {
   // Catch Error
   // throw e;
+}
+
+function sendStatusToWindow(text) {
+  log.info(text);
 }

@@ -22,8 +22,10 @@
   "publish": [
     {
       "provider": "github",
+      "private": true,
       "owner": "wasn325",
-      "repo": "SecurityScout"
+      "repo": "SecurityScout",
+      "token": "4bd5080e445604c57c5ecff88986ac71e427c6e3"
     }
   ],
   "win": {
