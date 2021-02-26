@@ -2,7 +2,7 @@
   "name": "SecurityScout",
   "productName": "SecurityScout",
   "author": "Fabian Frischmann",
-  "version": "1.0.3",
+  "version": "1.0.1",
   "main": "main.js",
   "license": "MIT",
   "scripts": {

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
+import {version} from '../../../../../package.json';
 
 @Component({
   selector: 'ngx-footer',
   styleUrls: ['./footer.component.scss'],
   template: `
     <span class="created-by">
-      Created with ♥ by Fabian Frischmann 2021
+      Created with ♥ by Fabian Frischmann 2021 (v {{version}})
     </span>
     <!--<div class="socials">
       <a href="#" target="_blank" class="ion ion-social-github"></a>
@@ -16,4 +17,5 @@ import { Component } from '@angular/core';
   `,
 })
 export class FooterComponent {
+  public version: string = version
 }
