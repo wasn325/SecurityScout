@@ -49,7 +49,7 @@
     "@typescript-eslint/eslint-plugin": "^4.15.1",
     "@typescript-eslint/eslint-plugin-tslint": "^4.15.2",
     "@typescript-eslint/parser": "^4.15.1",
-    "angular2-chartjs": "0.4.1",
+    "angular2-chartjs": "0.5.1",
     "bootstrap": "4.6.0",
     "chai": "^4.3.0",
     "chart.js": "2.9.4",
