@@ -13,6 +13,10 @@ import {NbGlobalPhysicalPosition, NbToastrConfig, NbToastrService} from '@nebula
 export class OverviewComponent {
 
   settings = {
+    pager: {
+      display: true,
+      perPage: 15
+    },
     actions: {
       mode: window.external,
       add: false,
@@ -21,7 +25,7 @@ export class OverviewComponent {
     },
     columns: {
       nr: {
-        title: 'Artikel Nr.',
+        title: 'Nr.',
         type: 'number',
         sortDirection: 'asc',
         width: '5%'
