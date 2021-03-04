@@ -5,11 +5,10 @@ name: Node.js CI
 
 on:
   push:
-
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: self-hostet
 
     strategy:
       matrix:
