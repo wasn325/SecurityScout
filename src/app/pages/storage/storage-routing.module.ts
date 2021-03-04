@@ -24,6 +24,10 @@ const routes: Routes = [
         component: EditComponent,
       },
       {
+        path: 'edit/:stored',
+        component: EditComponent,
+      },
+      {
         path: 'details',
         component: DetailsComponent,
       },

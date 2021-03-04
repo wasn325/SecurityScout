@@ -25,7 +25,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         },
       },
       {
-        title: 'Neu',
+        title: 'Anlegen',
         icon: 'plus-circle-outline',
         link: '/pages/storage/add',
         data: {
@@ -34,9 +34,18 @@ export const MENU_ITEMS: NbMenuItem[] = [
         },
       },
       {
-        title: 'Bearbeiten',
+        title: 'Ändern',
         icon: 'edit-outline',
         link: '/pages/storage/edit',
+        data: {
+          permission: 'edit',
+          resource: 'storage',
+        },
+      },
+      {
+        title: 'Bestand Ändern',
+        icon: 'edit-outline',
+        link: '/pages/storage/edit/stored',
         data: {
           permission: 'edit',
           resource: 'storage',

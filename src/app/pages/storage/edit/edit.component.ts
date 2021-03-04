@@ -4,6 +4,7 @@ import {NbToastrService} from '@nebular/theme';
 import {environment} from '../../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {constructorParametersDownlevelTransform} from '@angular/compiler-cli';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'ngx-edit',
@@ -13,9 +14,10 @@ import {constructorParametersDownlevelTransform} from '@angular/compiler-cli';
 export class EditComponent implements OnInit {
   searchForm: FormGroup;
   editForm: FormGroup;
+  onlyStored: Boolean = false;
   item: {};
 
-  constructor(public fb: FormBuilder, private toastr: NbToastrService, private http: HttpClient) {
+  constructor(public fb: FormBuilder, private toastr: NbToastrService, private http: HttpClient, private route: ActivatedRoute) {
     this.searchForm = this.fb.group({
       nr: ['', Validators.required],
     });
@@ -29,6 +31,11 @@ export class EditComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      if(params['stored'] !== undefined && params['stored'] !== null){
+        this.onlyStored = true;
+      }
+    })
   }
 
   searchItem() {
@@ -50,12 +57,19 @@ export class EditComponent implements OnInit {
 
   setupItem() {
     this.editForm.setValue(this.item);
+    if(this.onlyStored){
+      this.editForm.get('nr').disable()
+      this.editForm.get('name').disable()
+      this.editForm.get('sap_name').disable()
+      this.editForm.get('description').disable()
+    }
   }
 
   editItem() {
     if (
       this.editForm.get('nr').value === '' ||
       this.editForm.get('name').value === '' ||
+      this.editForm.get('sap_name').value === '' ||
       this.editForm.get('description').value === '' ||
       this.editForm.get('stored').value === ''
     ) {
