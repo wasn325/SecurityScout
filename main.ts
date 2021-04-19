@@ -41,7 +41,7 @@ function createWindow(): BrowserWindow {
       electron: require(`${__dirname}/node_modules/electron`)
     });
     win.loadURL('http://localhost:4200');
-    Menu.setApplicationMenu(null)
+
 
   } else {
     win.loadURL(url.format({
@@ -49,6 +49,7 @@ function createWindow(): BrowserWindow {
       protocol: 'file:',
       slashes: true,
     }));
+    Menu.setApplicationMenu(null)
   }
 
   // Emitted when the window is closed.
