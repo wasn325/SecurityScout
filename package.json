@@ -45,7 +45,7 @@
     "@nebular/theme": "7.0.0",
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
-    "@swimlane/ngx-charts": "^14.0.0",
+    "@swimlane/ngx-charts": "^17.0.1",
     "@typescript-eslint/eslint-plugin": "^4.15.1",
     "@typescript-eslint/eslint-plugin-tslint": "^4.15.2",
     "@typescript-eslint/parser": "^4.16.1",
