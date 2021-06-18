@@ -7,6 +7,8 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
 import {NbGlobalPhysicalPosition, NbToastrConfig, NbToastrService} from '@nebular/theme';
 import {LocalDataSource, Ng2SmartTableComponent} from "ng2-smart-table";
+import {LangChangeEvent, TranslateService} from "@ngx-translate/core";
+import {SeoService} from "../../../@core/utils";
 
 @Component({
   selector: 'ngx-users',
@@ -16,40 +18,16 @@ import {LocalDataSource, Ng2SmartTableComponent} from "ng2-smart-table";
 export class UsersComponent implements OnInit {
   addUserForm: FormGroup;
   config: NbToastrConfig;
+  translate: TranslateService;
 
-  settings = {
-    pager: {
-      display: true,
-      perPage: 15
-    },
-    actions: {
-      mode: window.external,
-      add: false,
-      edit: false,
-      delete: false,
-    },
-    columns: {
-      name: {
-        title: 'Name',
-        type: 'string'
-      },
-      email: {
-        title: 'E-Mail Adresse',
-        type: 'string'
-      },
-      profile: {
-        title: 'Rollen',
-        type: 'string'
-      },
-    },
-  };
+  settings: any;
 
   source: LocalDataSource = new LocalDataSource();
   // source: ServerDataSource;
 
   @ViewChild('table') table: Ng2SmartTableComponent;
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private toastr: NbToastrService) {
+  constructor(private fb: FormBuilder, private http: HttpClient, private toastr: NbToastrService, translate: TranslateService) {
     this.addUserForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -66,6 +44,11 @@ export class UsersComponent implements OnInit {
         status: 'danger',
       },
     });
+    this.translate = translate;
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      this.initTable();
+    });
+    this.initTable();
     this.getUser();
   }
 
@@ -93,6 +76,35 @@ export class UsersComponent implements OnInit {
         })
     ;
 
+  }
+
+  initTable() {
+    this.settings = {
+      pager: {
+        display: true,
+        perPage: 15
+      },
+      actions: {
+        mode: window.external,
+        add: false,
+        edit: false,
+        delete: false,
+      },
+      columns: {
+        name: {
+          title: this.translate.instant('manage.user.name'),
+          type: 'string'
+        },
+        email: {
+          title: this.translate.instant('manage.user.mail'),
+          type: 'string'
+        },
+        profile: {
+          title: this.translate.instant('manage.user.department'),
+          type: 'string'
+        },
+      },
+    };
   }
 
   getUser(){

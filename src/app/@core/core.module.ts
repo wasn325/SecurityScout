@@ -162,6 +162,12 @@ export const NB_CORE_PROVIDERS = [
         view: 'storage',
         edit: 'storage',
       },
+      marketing: {
+      view: 'storage',
+      },
+      billing: {
+      view: 'storage',
+      },
     },
   }).providers,
 

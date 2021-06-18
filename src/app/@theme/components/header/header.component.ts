@@ -7,6 +7,7 @@ import { map, takeUntil } from 'rxjs/operators';
 import { Subject, Observable } from 'rxjs';
 import { RippleService } from '../../../@core/utils/ripple.service';
 import {NbAuthJWTToken, NbAuthService} from '@nebular/auth';
+import {LangChangeEvent, TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'ngx-header',
@@ -47,9 +48,22 @@ export class HeaderComponent implements OnInit, OnDestroy {
     },
   ];
 
+  languages = [
+    {
+      name: 'Deutsch',
+      value: 'de',
+    },
+    {
+      name: 'English',
+      value: 'en',
+    }
+  ]
+
   currentTheme = 'default';
 
-  userMenu = [ /*{ title: 'Profile' }, */{ title: 'Log out',  link: '/auth/logout'} ];
+  currentLanguage = 'de';
+
+  userMenu = [ { title: 'Profile' }, { title: 'Log out',  link: '/auth/logout'} ];
 
   public constructor(
     private sidebarService: NbSidebarService,
@@ -60,12 +74,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private breakpointService: NbMediaBreakpointsService,
     private rippleService: RippleService,
     private authService: NbAuthService,
+    private translate: TranslateService
   ) {
     this.materialTheme$ = this.themeService.onThemeChange()
       .pipe(map(theme => {
         const themeName: string = theme?.name || '';
         return themeName.startsWith('material');
       }));
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      this.currentLanguage = event.lang;
+      console.log(event.lang);
+    });
     this.authService.onTokenChange()
       .subscribe((token: NbAuthJWTToken) => {
 
@@ -109,6 +128,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   changeTheme(themeName: string) {
     this.themeService.changeTheme(themeName);
+  }
+
+  changeLanguage(languageName: string){
+    this.translate.use(languageName);
   }
 
   toggleSidebar(): boolean {

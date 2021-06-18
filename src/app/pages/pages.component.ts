@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 
-import {MENU_ITEMS} from './pages-menu';
 import {NbAccessChecker} from '@nebular/security';
 import {NbMenuItem} from '@nebular/theme';
+import {LangChangeEvent, TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'ngx-pages',
@@ -16,12 +16,18 @@ import {NbMenuItem} from '@nebular/theme';
 })
 export class PagesComponent implements OnInit {
 
-  menu = MENU_ITEMS;
+  menu: NbMenuItem[];
+  translate: TranslateService;
 
-  constructor(private accessChecker: NbAccessChecker) {
+  constructor(private accessChecker: NbAccessChecker, translate: TranslateService) {
+    this.translate = translate;
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      this.initMenu();
+    });
   }
 
   ngOnInit() {
+    this.initMenu();
     this.authMenuItems();
   }
 
@@ -55,6 +61,81 @@ export class PagesComponent implements OnInit {
         }
       });
     }
+  }
+
+  initMenu() {
+    this.menu = [
+      {
+        title: this.translate.instant('menu.item.dashboard'),
+        icon: 'shopping-cart-outline',
+        link: '/pages/dashboard',
+        home: true,
+      },
+      {
+        title: this.translate.instant('menu.item.storage'),
+        group: true,
+      },
+      {
+        title: this.translate.instant('menu.item.storage'),
+        icon: 'archive-outline',
+        expanded: true,
+        children: [
+          {
+            title: this.translate.instant('menu.item.overview'),
+            icon: 'eye-outline',
+            link: '/pages/storage/overview',
+            data: {
+              permission: 'view',
+              resource: 'storage',
+            },
+          },
+          {
+            title: this.translate.instant('menu.item.add'),
+            icon: 'plus-circle-outline',
+            link: '/pages/storage/add',
+            data: {
+              permission: 'create',
+              resource: 'storage',
+            },
+          },
+          {
+            title: this.translate.instant('menu.item.edit.general'),
+            icon: 'edit-outline',
+            link: '/pages/storage/edit',
+            data: {
+              permission: 'edit',
+              resource: 'storage',
+            },
+          },
+          {
+            title: this.translate.instant('menu.item.edit.items'),
+            icon: 'edit-outline',
+            link: '/pages/storage/edit/stored',
+            data: {
+              permission: 'edit',
+              resource: 'storage',
+            },
+          },
+        ],
+      },
+      {
+        title: this.translate.instant('menu.item.administrative'),
+        group: true,
+        data: {
+          permission: 'view',
+          resource: 'admin',
+        },
+      },
+      {
+        title: this.translate.instant('menu.item.user'),
+        icon: 'people-outline',
+        link: '/pages/admin/user',
+        data: {
+          permission: 'edit',
+          resource: 'user',
+        },
+      }
+  ]
   }
 
 }

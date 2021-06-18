@@ -16,6 +16,23 @@
 
 <div class="header-container">
   <nb-actions size="small">
+
+    <nb-action class="control-item">
+      <nb-select
+        status="primary"
+        matRipple
+        [selected]="currentLanguage"
+        (selectedChange)="changeLanguage($event)"
+      >
+        <nb-option
+          *ngFor="let theme of languages"
+          [value]="theme.value"
+          matRipple
+        >{{ theme.name }}
+        </nb-option>
+      </nb-select>
+    </nb-action>
+
     <nb-action class="control-item">
       <nb-select
         status="primary"
@@ -27,7 +44,8 @@
           *ngFor="let theme of themes"
           [value]="theme.value"
           matRipple
-        >{{ theme.name }}</nb-option>
+        >{{ theme.name }}
+        </nb-option>
       </nb-select>
     </nb-action>
 

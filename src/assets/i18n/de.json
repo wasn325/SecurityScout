@@ -1,0 +1,51 @@
+{
+  "manage": {
+    "user": {
+      "users":  "Benutzer",
+      "new": "Benutzer anlegen",
+      "name": "Name",
+      "mail": "E-Mail",
+      "picture": "Profilbild",
+      "department": "Abteilung"
+    }
+  },
+  "forms": {
+    "select": {
+      "choose": "Bitte wählen"
+    },
+    "get": "Abfragen",
+    "edit": "Bearbeiten",
+    "add": "Anlegen"
+  },
+  "menu": {
+    "item": {
+      "dashboard": "Übersicht",
+      "storage": "Lager",
+      "overview": "Übersicht",
+      "edit": {
+        "general": "Bearbeiten",
+        "items": "Bestand ändern"
+      },
+      "administrative": "Verwaltung",
+      "user": "Benutzer",
+      "add": "Hinzufügen"
+    }
+  },
+  "article": {
+    "edit": {
+      "general": "Artikel bearbeiten",
+      "stock": "Lagerbestand ändern"
+    },
+    "new": "Neuer Artikel",
+    "search": "Artikel suchen",
+    "number": "Artikel Nummer",
+    "name": "Name",
+    "sap": "SAP",
+    "description": "Beschreibung",
+    "stock": "Lagerbestand",
+    "operation": {
+      "success": "Artikel wurde angelegt!",
+      "fail": "Fehler beim Anlegen!"
+    }
+  }
+}

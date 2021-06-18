@@ -1,0 +1,51 @@
+{
+  "manage": {
+    "user": {
+      "users":  "User",
+      "new": "Add User",
+      "name": "Name",
+      "mail": "E-Mail",
+      "picture": "Profile",
+      "department": "Department"
+    }
+  },
+  "forms": {
+    "select": {
+      "choose": "Please Choose"
+    },
+    "get": "Get",
+    "edit": "Edit",
+    "add": "Add"
+  },
+  "menu": {
+    "item": {
+      "dashboard": "Dashboard",
+      "storage": "Storage",
+      "overview": "Overview",
+      "edit": {
+        "general": "Edit",
+        "items": "Change Stock"
+      },
+      "administrative": "Administration",
+      "user": "User",
+      "add": "New"
+    }
+  },
+  "article": {
+    "edit": {
+      "general": "Edit Article",
+      "stock": "Change Stock"
+    },
+    "new": "Add Article",
+    "search": "Search Article",
+    "number": "Artikel Number",
+    "name": "Name",
+    "sap": "SAP",
+    "description": "Description",
+    "stock": "Stock",
+    "operation": {
+      "success": "Article has been added!",
+      "fail": "Error while adding Article!"
+    }
+  }
+}

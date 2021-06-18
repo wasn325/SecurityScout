@@ -2,7 +2,7 @@ import { NbMenuItem } from '@nebular/theme';
 
 export const MENU_ITEMS: NbMenuItem[] = [
   {
-    title: 'Übersicht',
+    title: '{{ \'manage.user.department\' | translate }}',
     icon: 'shopping-cart-outline',
     link: '/pages/dashboard',
     home: true,

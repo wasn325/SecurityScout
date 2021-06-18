@@ -17,6 +17,7 @@ import {FormsModule as ngFormsModule, ReactiveFormsModule} from '@angular/forms'
 import { DetailsComponent } from './details/details.component';
 import { EditComponent } from './edit/edit.component';
 import {NbSecurityModule} from '@nebular/security';
+import {TranslateModule, TranslateService} from "@ngx-translate/core";
 
 @NgModule({
   declarations: [StorageComponent, OverviewComponent, AddComponent, DetailsComponent, EditComponent],
@@ -43,6 +44,7 @@ import {NbSecurityModule} from '@nebular/security';
         NbIconModule,
         ngFormsModule, NbSecurityModule,
         ReactiveFormsModule, NbProgressBarModule,
+      TranslateModule,
     ],
   exports: [
     OverviewComponent,
