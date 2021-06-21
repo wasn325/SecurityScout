@@ -23,6 +23,7 @@ import {
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {PagesModule} from "./pages/pages.module";
+import {CustomTranslateLoader} from "./@core/utils/custom-translate-loader";
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -57,5 +58,6 @@ export class AppModule {
 }
 
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+  // return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+  return new CustomTranslateLoader(http);
 }

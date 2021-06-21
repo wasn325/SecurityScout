@@ -56,6 +56,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     {
       name: 'English',
       value: 'en',
+    },
+    {
+      name: 'Keys',
+      value: 'keys',
     }
   ]
 
