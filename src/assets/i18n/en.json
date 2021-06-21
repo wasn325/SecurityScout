@@ -47,5 +47,8 @@
       "success": "Article has been added!",
       "fail": "Error while adding Article!"
     }
+  },
+  "general": {
+    "copyright": "Created with ♥ by"
   }
 }

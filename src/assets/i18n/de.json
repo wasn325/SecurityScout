@@ -47,5 +47,8 @@
       "success": "Artikel wurde angelegt!",
       "fail": "Fehler beim Anlegen!"
     }
+  },
+  "general": {
+    "copyright": "Erstellt mit ♥ von"
   }
 }

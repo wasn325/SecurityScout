@@ -41,6 +41,7 @@ import { CORPORATE_THEME } from './styles/theme.corporate';
 import { DARK_THEME } from './styles/theme.dark';
 import { MATERIAL_LIGHT_THEME } from './styles/material/theme.material-light';
 import { MATERIAL_DARK_THEME } from './styles/material/theme.material-dark';
+import {TranslateModule} from "@ngx-translate/core";
 
 const NB_MODULES = [
   NbLayoutModule,
@@ -55,6 +56,7 @@ const NB_MODULES = [
   NbSelectModule,
   NbIconModule,
   NbEvaIconsModule,
+  TranslateModule
 ];
 const COMPONENTS = [
   HeaderComponent,
