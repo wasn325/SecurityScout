@@ -6,6 +6,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
 import {NbGlobalPhysicalPosition, NbToastrConfig, NbToastrService} from '@nebular/theme';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'ngx-add',
@@ -69,7 +70,12 @@ export class AddComponent {
       if (this.form.get('stored').value === '') this.errors.push('Wie viel Stück haben wir davon im Lager?');*/
 
       // this.error = true;
-      this.toastr.danger('Es wurden nicht alle Felder ausgefüllt!', 'Es ist ein Fehler aufgetreten!', this.config);
+      Swal.fire(
+        'Es ist ein Fehler aufgetreten!',
+        'Es wurden nicht alle Felder ausgefüllt!',
+        'error'
+      )
+      // this.toastr.danger('Es wurden nicht alle Felder ausgefüllt!', 'Es ist ein Fehler aufgetreten!', this.config);
       /*setTimeout(() => { // Reset Message
         // this.error = false;
         this.errors = [];
@@ -82,7 +88,12 @@ export class AddComponent {
     this.http.post(environment.backend + 'api/v1/storage', this.form.value).toPromise().then(
       result => { // Success
         this.setValue(100);
-        this.toastr.success('Artikel wurde hinzugefügt', ':)');
+        Swal.fire(
+          ':)',
+          'Artikel wurde hinzugefügt',
+          'success'
+        )
+        // this.toastr.success('Artikel wurde hinzugefügt', ':)');
         this.working = false;
         this.setValue(0);
         /*this.success = true;
@@ -92,7 +103,12 @@ export class AddComponent {
       })
       .catch(
         error => { // Something went wrong
-          this.toastr.danger(error.error, 'Es ist ein Fehler aufgetreten!', this.config);
+          Swal.fire(
+            'Es ist ein Fehler aufgetreten!',
+            error.error,
+            'error'
+          )
+          // this.toastr.danger(error.error, 'Es ist ein Fehler aufgetreten!', this.config);
           /*this.errors.push(error.error);
           this.error = true;
           setTimeout(() => { // Reset Message
