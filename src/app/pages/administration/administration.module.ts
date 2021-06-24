@@ -37,7 +37,8 @@ import {TranslateModule} from "@ngx-translate/core";
     NbDatepickerModule,
     NbSelectModule,
     NbIconModule, Ng2SmartTableModule,
-    TranslateModule
+    TranslateModule,
+
   ]
 })
 export class AdministrationModule {
