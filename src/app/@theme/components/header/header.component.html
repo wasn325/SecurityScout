@@ -58,23 +58,96 @@
         [matRippleCentered]="true"
       ></nb-search>
     </nb-action>
-    <nb-action
-      class="control-item"
-      icon="email-outline"
-      *nbIsGranted="['view', 'mail']"
-      matRipple
-      [disabled]="true"
-      [matRippleUnbounded]="true"
-      [matRippleCentered]="true"
+    <nb-action *ngIf="messages.length>0"
+               class="control-item"
+               icon="email-outline"
+               matRipple
+               [matRippleUnbounded]="true"
+               [matRippleCentered]="true"
+               [nbPopover]="msg"
+               nbPopoverPlacement="bottom"
+               [id]="mail"
+               [badgeText]="messages.length"
+               badgePosition="bottom right"
+               badgeStatus="info"
     ></nb-action>
-    <nb-action
+    <nb-action *ngIf="messages.length==0"
+               class="control-item"
+               icon="email-outline"
+               matRipple
+               [matRippleUnbounded]="true"
+               [matRippleCentered]="true"
+               [nbPopover]="msg"
+               nbPopoverPlacement="bottom"
+               [id]="mail"
+    ></nb-action>
+    <ng-template #msg>
+      <nb-card size="small" style="margin-bottom: 0px!important;">
+        <center style="margin-bottom: 10px; margin-top: 10px;"><h4>Nachrichten</h4></center>
+        <nb-list *ngIf="messages.length > 0" style="width: 500px;">
+          <nb-list-item *ngFor="let note of messages">
+            <nb-user size="medium"
+                     picture='https://i.gifer.com/no.gif'
+                     onlyPicture>
+            </nb-user>
+            <div style="margin-left: 10px;">
+              <h6>{{note.title}}</h6>
+              <p>{{note.name}}</p>
+            </div>
+          </nb-list-item>
+        </nb-list>
+        <nb-list *ngIf="messages.length == 0" style="width: 500px;">
+          <nb-list-item>
+            Keine Nachrichten
+          </nb-list-item>
+        </nb-list>
+      </nb-card>
+    </ng-template>
+    <nb-action *ngIf="notifications.length>0"
       class="control-item"
       icon="bell-outline"
       matRipple
-      [disabled]="true"
       [matRippleUnbounded]="true"
       [matRippleCentered]="true"
+      [nbPopover]="not"
+      nbPopoverPlacement="bottom"
+      [id]="bell"
+      [badgeText]="notifications.length"
+      badgePosition="bottom right"
+      badgeStatus="info"
     ></nb-action>
+    <nb-action *ngIf="notifications.length==0"
+               class="control-item"
+               icon="bell-outline"
+               matRipple
+               [matRippleUnbounded]="true"
+               [matRippleCentered]="true"
+               [nbPopover]="not"
+               nbPopoverPlacement="bottom"
+               [id]="bell"
+    ></nb-action>
+    <ng-template #not>
+      <nb-card size="small" style="margin-bottom: 0px!important;">
+        <center style="margin-bottom: 10px; margin-top: 10px;"><h4>Benachrichtigungen</h4></center>
+        <nb-list *ngIf="notifications.length > 0" style="width: 500px;">
+          <nb-list-item *ngFor="let note of notifications">
+            <nb-user size="medium"
+                     picture='https://i.gifer.com/no.gif'
+                     onlyPicture>
+            </nb-user>
+            <div style="margin-left: 10px;">
+              <h6>{{note.title}}</h6>
+              <p>{{note.name}}</p>
+            </div>
+          </nb-list-item>
+        </nb-list>
+        <nb-list *ngIf="notifications.length == 0" style="width: 500px;">
+          <nb-list-item>
+          Keine Benachrichtigungen
+          </nb-list-item>
+        </nb-list>
+      </nb-card>
+    </ng-template>
     <nb-action
       class="user-action"
       matRipple

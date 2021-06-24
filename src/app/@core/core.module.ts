@@ -55,6 +55,8 @@ import {AuthGuard} from './guardians/auth.guard';
 import {RoleProvider} from './providers/role.provider';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {TokenInterceptor} from './providers/token.interceptor';
+import {SocketProvider} from "./data/socket-provider";
+import {SocketProviderImplService} from "./mock/socket-provider-impl.service";
 
 const socialLinks = [];
 
@@ -81,6 +83,7 @@ const DATA_SERVICES = [
   {provide: StorageData, useClass: StorageDataService},
   {provide: MAT_RIPPLE_GLOBAL_OPTIONS, useExisting: RippleService},
   {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
+  {provide: SocketProvider, useClass: SocketProviderImplService}
 ];
 
 export const NB_CORE_PROVIDERS = [
@@ -116,7 +119,7 @@ export const NB_CORE_PROVIDERS = [
           method: 'post',
           requireValidToken: true,
           redirect: {
-            success: null,
+            success: '/pages/dashboard',
             failure: '/',
           },
           defaultErrors: ['Something went wrong, please try again.'],

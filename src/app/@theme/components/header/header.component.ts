@@ -1,5 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {
+  NbActionComponent,
+  NbMediaBreakpointsService,
+  NbMenuService,
+  NbSidebarService,
+  NbThemeService
+} from '@nebular/theme';
 
 import { UserData } from '../../../@core/data/users';
 import { LayoutService } from '../../../@core/utils';
@@ -8,6 +14,9 @@ import { Subject, Observable } from 'rxjs';
 import { RippleService } from '../../../@core/utils/ripple.service';
 import {NbAuthJWTToken, NbAuthService} from '@nebular/auth';
 import {LangChangeEvent, TranslateService} from "@ngx-translate/core";
+import {createViewChild} from "@angular/compiler/src/core";
+import {SocketProvider} from "../../../@core/data/socket-provider";
+import {SocketProviderImplService} from "../../../@core/mock/socket-provider-impl.service";
 
 @Component({
   selector: 'ngx-header',
@@ -20,6 +29,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public readonly materialTheme$: Observable<boolean>;
   userPictureOnly: boolean = false;
   user: any;
+  @ViewChild('bell') bell: NbActionComponent
+  @ViewChild('mail') mail: NbActionComponent
 
   themes = [
     {
@@ -63,6 +74,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   ]
 
+  notifications: { name: string, title: string }[] = [];
+  messages: { name: string, title: string }[] = [];
+
   currentTheme = 'default';
 
   currentLanguage = 'de';
@@ -78,7 +92,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private breakpointService: NbMediaBreakpointsService,
     private rippleService: RippleService,
     private authService: NbAuthService,
-    private translate: TranslateService
+    private translate: TranslateService,/*
+    private socketClient: SocketProviderImplService*/
   ) {
     this.materialTheme$ = this.themeService.onThemeChange()
       .pipe(map(theme => {
@@ -97,6 +112,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
         }
 
       });
+    /*this.socketClient.subscribe('notifications', function (data) {
+      console.log(data.body);
+    })*/
   }
 
   ngOnInit() {
@@ -136,6 +154,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   changeLanguage(languageName: string){
     this.translate.use(languageName);
+    this.newNotification();
   }
 
   toggleSidebar(): boolean {
@@ -148,5 +167,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   navigateHome() {
     this.menuService.navigateHome();
     return false;
+  }
+
+  newNotification(){
+    this.notifications.push({ name: 'TestMessage', title: 'Test' });
+    this.messages.push({ name: 'TestMessage', title: 'Fabian Frischmann' });
+    this.messages.push({ name: 'Hilfe', title: 'Weinfurtner Martin' });
   }
 }
