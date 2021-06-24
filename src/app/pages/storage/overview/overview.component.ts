@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {NbGlobalPhysicalPosition, NbToastrConfig, NbToastrService} from '@nebular/theme';
 import {LangChangeEvent, TranslateService} from "@ngx-translate/core";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'ngx-storage-overview',
@@ -35,7 +36,12 @@ export class OverviewComponent {
         this.source.load(data);
       },
       (error) => {
-        toastr.danger('Lager konnte nicht geladen werden!', 'Fehler', new NbToastrConfig({
+        Swal.fire(
+          'Es ist ein Fehler aufgetreten!',
+          'Lager konnte nicht geladen werden',
+          'error'
+        )
+        /*toastr.danger('Lager konnte nicht geladen werden!', 'Fehler', new NbToastrConfig({
           position: NbGlobalPhysicalPosition.TOP_RIGHT,
           destroyByClick: true,
           duration: 10000,
@@ -44,7 +50,7 @@ export class OverviewComponent {
             pack: 'eva',
             status: 'danger',
           },
-        }));
+        }));*/
       });
     // this.source = new ServerDataSource(http, {endPoint: environment.backend + 'api/v1/storage'});
     this.router = routerModule;

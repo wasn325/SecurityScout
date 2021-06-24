@@ -5,10 +5,11 @@ import {NbAuthService} from '@nebular/auth';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
-import {NbGlobalPhysicalPosition, NbToastrConfig, NbToastrService} from '@nebular/theme';
+import {NbGlobalPhysicalPosition, NbToastrConfig, NbToastrService, NbWindowService} from '@nebular/theme';
 import {LocalDataSource, Ng2SmartTableComponent} from "ng2-smart-table";
 import {LangChangeEvent, TranslateService} from "@ngx-translate/core";
 import {SeoService} from "../../../@core/utils";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'ngx-users',
@@ -27,7 +28,7 @@ export class UsersComponent implements OnInit {
 
   @ViewChild('table') table: Ng2SmartTableComponent;
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private toastr: NbToastrService, translate: TranslateService) {
+  constructor(private fb: FormBuilder, private http: HttpClient, private toastr: NbToastrService, translate: TranslateService, private windowService: NbWindowService) {
     this.addUserForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -53,6 +54,7 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
   }
 
   addUser() {
@@ -61,20 +63,46 @@ export class UsersComponent implements OnInit {
       this.addUserForm.get('email').value === '' ||
       this.addUserForm.get('profile').value === ''
     ){
-      this.toastr.danger('Es wurden nicht alle Felder ausgefüllt!', 'Es ist ein Fehler aufgetreten!', this.config);
+      Swal.fire(
+        'Es ist ein Fehler aufgetreten!',
+        'Es wurden nicht alle Felder ausgefüllt!',
+        'error'
+      )
+      // this.toastr.danger('Es wurden nicht alle Felder ausgefüllt!', 'Es ist ein Fehler aufgetreten!', this.config);
       return;
     }
 
-    this.http.post(environment.backend + 'api/v1/user', this.addUserForm.value).toPromise().then(
-      result => { // Success
-        this.toastr.success('Benutzer wurde hinzugefügt', ':)');
-        this.getUser();
-      })
-      .catch(
-        error => { // Something went wrong
-          this.toastr.danger(error.error, 'Es ist ein Fehler aufgetreten!', this.config);
-        })
-    ;
+    Swal.fire({
+      title: 'Sind Sie sich sicher?',
+      text: 'Hiermit legen Sie einen neuen Benutzer an!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Ja',
+      cancelButtonText: 'Abbrechen'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.http.post(environment.backend + 'api/v1/user', this.addUserForm.value).toPromise().then(
+          result => { // Success
+            Swal.fire(
+              ':)',
+              'Der Benutzer wurde hinzugefügt',
+              'success'
+            )
+            // this.toastr.success('Benutzer wurde hinzugefügt', ':)');
+            this.getUser();
+          })
+          .catch(
+            error => { // Something went wrong
+              Swal.fire(
+                'Fehler beim Anlegen',
+                error.error,
+                'error'
+              )
+              // this.toastr.danger(error.error, 'Es ist ein Fehler aufgetreten!', this.config);
+            })
+        ;
+      }
+    })
 
   }
 

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {StorageData} from '../../../@core/data/storage-data';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'ngx-details',
@@ -9,7 +10,7 @@ import {StorageData} from '../../../@core/data/storage-data';
 })
 export class DetailsComponent implements OnInit {
 
-  constructor(private router: ActivatedRoute, private service: StorageData) {
+  constructor(private route: ActivatedRoute, private router: Router, private service: StorageData) {
   }
 
   id: number;
@@ -17,9 +18,18 @@ export class DetailsComponent implements OnInit {
   data: any;
 
   ngOnInit(): void {
-    if (this.router.snapshot.params['id'] != null) {
-      this.id = this.router.snapshot.params['id'];
+    if (this.route.snapshot.params['id'] != null) {
+      this.id = this.route.snapshot.params['id'];
       this.data = this.service.getData()[this.id - 1];
+    }
+    if(this.id==null || this.data == null){
+      Swal.fire(
+        'Es ist ein Fehler aufgetreten!',
+        'Kein Artikel gefunden oder keine ID angegeben!',
+        'error'
+      ).then((result) => {
+        this.router.navigate(['/pages/storage/overview']);
+      });
     }
   }
 

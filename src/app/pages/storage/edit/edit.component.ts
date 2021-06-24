@@ -5,6 +5,7 @@ import {environment} from '../../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {constructorParametersDownlevelTransform} from '@angular/compiler-cli';
 import {ActivatedRoute} from "@angular/router";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'ngx-edit',
@@ -40,7 +41,12 @@ export class EditComponent implements OnInit {
 
   searchItem() {
     if (this.searchForm.get('nr').value === '') {
-      this.toastr.danger('Artikel Nummer darf nicht leer sein!', 'EIn Fehler ist aufgetreten');
+      Swal.fire(
+        'Es ist ein Fehler aufgetreten!',
+        'Artikel Nummer darf nicht leer sein!',
+        'error'
+      )
+      // this.toastr.danger('Artikel Nummer darf nicht leer sein!', 'EIn Fehler ist aufgetreten');
       return;
     }
     this.http.get(environment.backend + 'api/v1/storage/' + this.searchForm.get('nr').value).subscribe((data: any) => {
@@ -48,7 +54,12 @@ export class EditComponent implements OnInit {
         this.setupItem();
       },
       error => { // Something went wrong
-        this.toastr.danger(error.error, 'Es ist ein Fehler aufgetreten!');
+        // this.toastr.danger(error.error, 'Es ist ein Fehler aufgetreten!');
+        Swal.fire(
+          'Es ist ein Fehler aufgetreten!',
+          error.error,
+          'error'
+        )
         this.item = null;
         this.setupItem();
       })
@@ -73,13 +84,23 @@ export class EditComponent implements OnInit {
       this.editForm.get('description').value === '' ||
       this.editForm.get('stored').value === ''
     ) {
-      this.toastr.danger('Es wurden nicht alle Felder ausgefüllt!', 'Es ist ein Fehler aufgetreten!');
+      Swal.fire(
+        'Es ist ein Fehler aufgetreten!',
+        'Es wurden nicht alle Felder ausgefüllt!',
+        'error'
+      )
+      // this.toastr.danger('Es wurden nicht alle Felder ausgefüllt!', 'Es ist ein Fehler aufgetreten!');
       return;
     }
     this.http.patch(environment.backend + 'api/v1/storage/' + this.searchForm.get('nr').value, this.editForm.value)
       .subscribe(() => {
           this.item = {};
-          this.toastr.success('Artikel wurde bearbeitet', ':)');
+          Swal.fire(
+            ':)',
+            'Artikel wurde bearbeitet',
+            'success'
+          )
+          // this.toastr.success('Artikel wurde bearbeitet', ':)');
       },
       /*(error) => {
         this.toastr.danger(error.error, 'Es ist ein Fehler aufgetreten!');
