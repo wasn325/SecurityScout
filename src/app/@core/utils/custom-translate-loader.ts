@@ -15,9 +15,6 @@ export class CustomTranslateLoader implements TranslateLoader {
   constructor(private httpClient: HttpClient) {}
   getTranslation(lang: string): Observable<any> {
     const apiAddress = environment.backend + `api/v1/resources/i18n/${lang}.json`;
-    if(lang==='keys'){
-      return this.httpClient.get(environment.backend + 'api/v1/resources/i18n/keys.json');
-    }
     return this.httpClient.get(apiAddress/*, { headers: this.contentHeader }*/)
       .pipe(
         catchError(_ => this.httpClient.get(`/api/v1/resources/i18n/de.json`, {headers: this.contentHeader}) //Failsafe 1: load default language
