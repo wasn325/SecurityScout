@@ -47,7 +47,7 @@
     "@ngx-translate/http-loader": "^6.0.0",
     "@sweetalert2/theme-borderless": "^5.0.0",
     "@stomp/stompjs": "^6.1.0",
-    "@swimlane/ngx-charts": "^14.0.0",
+    "@swimlane/ngx-charts": "^20.1.2",
     "@typescript-eslint/eslint-plugin": "^4.15.1",
     "@typescript-eslint/eslint-plugin-tslint": "^4.15.2",
     "@typescript-eslint/parser": "^4.16.1",
